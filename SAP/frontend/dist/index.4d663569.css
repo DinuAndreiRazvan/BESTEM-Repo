@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+}
+
+.statistics {
+  flex-wrap: wrap;
+  gap: 20px;
+  display: flex;
+}
+
+/*# sourceMappingURL=index.4d663569.css.map */
