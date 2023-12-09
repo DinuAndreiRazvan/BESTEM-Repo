@@ -1,13 +1,19 @@
-import os
 from openai import OpenAI
 
-client = OpenAI(api_key="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")
+client = OpenAI()
 
-
-content = input("User: ")
 completion = client.chat.completions.create(
-    model="gpt-3", messages=[{"role": "user", "content": content}]
+    model="gpt-3.5-turbo",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair.",
+        },
+        {
+            "role": "user",
+            "content": "Compose a poem that explains the concept of recursion in programming.",
+        },
+    ],
 )
 
-chat_response = completion.choices[0].message.content
-print(f"ChatGPT: {chat_response}")
+print(completion.choices[0].message)
