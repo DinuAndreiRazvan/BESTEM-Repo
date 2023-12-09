@@ -1,10 +1,11 @@
 import datetime
 from dataclasses import dataclass
 from sys import exit
-
 import pandas as pd
 import numpy as np
 import matplotlib as mp
+
+from stock import *
 
 
 @dataclass
@@ -38,18 +39,21 @@ def main():
             Stock(row["Date"], row["Product_ID"], row["Sales"], row["EndOfDayStock"])
         )
 
+    stock_check(stocks)
+
     # read the Excel file
-    df = pd.read_excel("transactions.xlsx", sheet_name="Sheet1")
+    # df = pd.read_excel("transactions.xlsx", sheet_name="Sheet1")
 
     # create a list of transactions
-    transactions = []
-    for _, row in df.iterrows():
-        transactions.append(
-            Transaction(row["Invoice"], row["Product_ID"], row["Description"],
-                        row["Quantity"], row["Date"], row["Price"],
-                        row["Customer ID"], row["Country"], ))
+    # transactions = []
+    # for _, row in df.iterrows():
+    #     transactions.append(
+    #         Transaction(row["Invoice"], row["Product_ID"], row["Description"],
+    #                     row["Quantity"], row["Date"], row["Price"],
+    #                     row["Customer ID"], row["Country"], ))
 
 
 # Fisierul asta trebuie rulat din terminal pentru a rula programul
 if __name__ == "__main__":
     exit(main())
+
