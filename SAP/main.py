@@ -1,17 +1,11 @@
 import datetime
 from dataclasses import dataclass
 from sys import exit
-<<<<<<< HEAD
 from typing import List
 
 import matplotlib.pyplot as plt
-=======
-import pandas as pd
->>>>>>> 7fb1628d589f1e9f2c06e0a8d520c3561b1b1c74
 import numpy as np
 import pandas as pd
-
-from analysis import *
 
 from stock import *
 
@@ -43,6 +37,37 @@ class Transaction:
     country: str
 
 
+def find_outliers(products_dict, unique_ids):
+    for key, value in products_dict.items():
+        if key == "17164B":
+            df = pd.DataFrame(
+                {
+                    "dates": value.dates,
+                    "sales": value.sales,
+                }
+            )
+            # Calculate the interquartile range (IQR)
+            Q1 = df["sales"].quantile(0.25)
+            Q3 = df["sales"].quantile(0.75)
+            IQR = Q3 - Q1
+
+            # Define the lower and upper bounds for outliers
+            lower_bound = Q1 - 1.5 * IQR
+            upper_bound = Q3 + 1.5 * IQR
+
+            # Identify outliers based on the bounds
+            outliers = df[(df["sales"] < lower_bound) | (df["sales"] > upper_bound)]
+
+            # Print or further analyze the outliers
+            print("Outliers:")
+            print(outliers)
+            plt.plot(outliers)
+            plt.title("Sales Over Time")
+            plt.xlabel("Date")
+            plt.ylabel("Sales")
+            plt.show()
+
+
 def main():
     # read the Excel file
     stock_file = pd.read_excel("sales_and_eodStocks.xlsx", sheet_name="Sheet1")
@@ -54,22 +79,18 @@ def main():
             Stock(row["Date"], row["Product_ID"], row["Sales"], row["EndOfDayStock"])
         )
 
-<<<<<<< HEAD
     # Create a dictionary of Product objects with product IDs as keys
-    unique_ids = set(stock.product_ID for stock in stocks)
+    unique_ids = list(dict.fromkeys(stock.product_ID for stock in stocks))
     products_dict = {product_id: Product([], [], []) for product_id in unique_ids}
-=======
     stock_check(stocks)
-
-    # read the Excel file
-    # df = pd.read_excel("transactions.xlsx", sheet_name="Sheet1")
->>>>>>> 7fb1628d589f1e9f2c06e0a8d520c3561b1b1c74
 
     # Populate the Product objects with data from the stocks array
     for stock in stocks:
         products_dict[stock.product_ID].dates.append(stock.date)
         products_dict[stock.product_ID].sales.append(stock.sales)
         products_dict[stock.product_ID].stocks.append(stock.endOfDayStock)
+
+    find_outliers(products_dict, unique_ids)
 
     # read the Excel file
     transaction_file = pd.read_excel("transactions.xlsx", sheet_name="Sheet1")
@@ -96,9 +117,6 @@ def main():
     #                     row["Quantity"], row["Date"], row["Price"],
     #                     row["Customer ID"], row["Country"], ))
 
+
 if __name__ == "__main__":
     exit(main())
-<<<<<<< HEAD
-=======
-
->>>>>>> 7fb1628d589f1e9f2c06e0a8d520c3561b1b1c74

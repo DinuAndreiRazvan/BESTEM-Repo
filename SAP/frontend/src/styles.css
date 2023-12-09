@@ -2,17 +2,33 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    background-color: #f5f5dc;
 }
 
-.dashboard {
+.container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.statistics {
-    display: flex;
-    gap: 20px;
     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: auto;
+    align-content: center;
+}
+.container:after {
+    display: block;
+    content: "";
+    margin: 16px;
+    flex: 999 999 auto;
+}
+.item {
+    flex: 0 0 auto;
+    margin: 16px;
+}
+
+header {
+    background-color: #e7d99f;
+    padding: 2% 0; /* Adjusted padding for better spacing */
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+    font-weight: 600;
 }
