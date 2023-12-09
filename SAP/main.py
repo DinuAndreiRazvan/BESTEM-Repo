@@ -1,13 +1,19 @@
 import datetime
 from dataclasses import dataclass
 from sys import exit
+<<<<<<< HEAD
 from typing import List
 
 import matplotlib.pyplot as plt
+=======
+import pandas as pd
+>>>>>>> 7fb1628d589f1e9f2c06e0a8d520c3561b1b1c74
 import numpy as np
 import pandas as pd
 
 from analysis import *
+
+from stock import *
 
 
 @dataclass
@@ -48,9 +54,16 @@ def main():
             Stock(row["Date"], row["Product_ID"], row["Sales"], row["EndOfDayStock"])
         )
 
+<<<<<<< HEAD
     # Create a dictionary of Product objects with product IDs as keys
     unique_ids = set(stock.product_ID for stock in stocks)
     products_dict = {product_id: Product([], [], []) for product_id in unique_ids}
+=======
+    stock_check(stocks)
+
+    # read the Excel file
+    # df = pd.read_excel("transactions.xlsx", sheet_name="Sheet1")
+>>>>>>> 7fb1628d589f1e9f2c06e0a8d520c3561b1b1c74
 
     # Populate the Product objects with data from the stocks array
     for stock in stocks:
@@ -76,6 +89,16 @@ def main():
             )
         )
 
+    # transactions = []
+    # for _, row in df.iterrows():
+    #     transactions.append(
+    #         Transaction(row["Invoice"], row["Product_ID"], row["Description"],
+    #                     row["Quantity"], row["Date"], row["Price"],
+    #                     row["Customer ID"], row["Country"], ))
 
 if __name__ == "__main__":
     exit(main())
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7fb1628d589f1e9f2c06e0a8d520c3561b1b1c74
