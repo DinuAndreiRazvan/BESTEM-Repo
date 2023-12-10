@@ -1,23 +1,15 @@
-import logging
 from sys import exit
-
-<<<<<<< HEAD
 from prophet import Prophet
 import pandas as pd
 import numpy as np
-=======
->>>>>>> fe0803b091c282b7d705489c0a1a7287307551fd
 import matplotlib as mp
-import numpy as np
-import pandas as pd
-from prophet import Prophet
-
+import logging
 
 
 def main():
     # read the Excel file
 
-    logger = logging.getLogger("cmdstanpy")
+    logger = logging.getLogger('cmdstanpy')
     logger.addHandler(logging.NullHandler())
     logger.propagate = False
     logger.setLevel(logging.CRITICAL)
@@ -43,36 +35,23 @@ def main():
             row_list.append(row)
 
             if data.shape[0] > 1:
-                data.rename(columns={"Date": "ds", "Sales": "y"}, inplace=True)
-                data["ds"] = pd.to_datetime(data["ds"])
+                data.rename(columns={'Date': 'ds', 'Sales': 'y'}, inplace=True)
+                data['ds'] = pd.to_datetime(data['ds'])
 
-                m = Prophet(
-                    yearly_seasonality=True,
-                    changepoint_range=0.8,
-                    changepoint_prior_scale=0.05,
-                )
-                m.add_seasonality(name="monthly", period=30.5, fourier_order=5)
+                m = Prophet(yearly_seasonality=True, changepoint_range=0.8, changepoint_prior_scale=0.05)
+                m.add_seasonality(name='monthly', period=30.5, fourier_order=5)
                 m.fit(data)
-                future = m.make_future_dataframe(periods=24, freq="MS")
+                future = m.make_future_dataframe(periods=24, freq='MS')
 
                 models[id] = m
                 forecasts[id] = m.predict(future)
 
             id = str(row["Product_ID"])
 
-<<<<<<< HEAD
     fig = models.get('15036').plot(forecasts.get('15036'), uncertainty=False, plot_cap=False, include_legend=True)
     fig.show()
     fig = models.get('15036').plot_components(forecasts.get('15036'))
     fig.show()
-=======
-    fig = models.get("15036").plot(
-        forecasts.get("15036"), uncertainty=False, plot_cap=False, include_legend=True
-    )
-    fig.savefig("prediction.png")
-    fig = models.get("15036").plot_components(forecasts.get("15036"))
-    fig.savefig("time_evolution.png")
->>>>>>> fe0803b091c282b7d705489c0a1a7287307551fd
 
 
 # Fisierul asta trebuie rulat din terminal pentru a rula programul
