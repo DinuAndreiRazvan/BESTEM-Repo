@@ -9,38 +9,21 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> fe0803b091c282b7d705489c0a1a7287307551fd
     <header><span>RetailX stats</span></header>
-    <div class="container">
-        <div class="item">
-            <canvas id="salesChart" width="400" height="200"></canvas>
-        </div>
-        <div class="item">
-            <canvas id="categoryChart" width="200" height="200"></canvas>
-<<<<<<< HEAD
-=======
-    <div class="dashboard">
-        <div class="statistics">
-            <canvas id="salesChart" width="200" height="100"></canvas>
-            <canvas id="categoryChart" width="100" height="100"></canvas>
->>>>>>> 14e87324d8109f2dd8f4ed6f53bac79bf3258e26
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
-=======
-            <div class="dashboard">
-                <div class="statistics">
-                    <canvas id="salesChart" width="200" height="100"></canvas>
-                    <canvas id="categoryChart" width="100" height="100"></canvas>
-                </div>
+    <main>
+        <div class="container">
+            <div class="item">
+                <img src="images/prediction.png" id="salesChart" width="500" height="300">
+                <p class="annotation">Prediction based on sale figures</p>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script src="script.js"></script>
->>>>>>> fe0803b091c282b7d705489c0a1a7287307551fd
+            <div class="item">
+                <img src="images/periodic_progress.png" id="categoryChart" width="500" height="300">
+                <p class="annotation">Histograms of sales for 3 years, a week, a year, and one month</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
