@@ -25,8 +25,8 @@ def main():
     models = {}
     forecasts = {}
     for id, data in df:
-        print(f"Product_ID: {id}")
-        if data.shape[0] > 1:
+        # print(f"Product_ID: {id}")
+        if data.shape[0] > 90:
             data.rename(columns={'Date': 'ds', 'Sales': 'y'}, inplace=True)
 
             m = Prophet(yearly_seasonality=True, n_changepoints=25, seasonality_prior_scale=0.1,
@@ -44,10 +44,6 @@ def main():
         min[key] = round(forecasts.get(key)['yhat'].mean() - df.get_group(key)['EndOfDayStock'].iloc[-1])
 
     res = dict(sorted(min.items(), key=itemgetter(1), reverse=False)[:10])
-
-    for key, values in res.items():
-        print(key, round(values))
-        print('\n')
 
     with open("./frontend/src/table_recommendation.json", "w") as outfile:
         json.dump(min, outfile)
