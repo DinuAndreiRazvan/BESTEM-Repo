@@ -1,48 +1,25 @@
-"use strict";
+document.addEventListener("DOMContentLoaded", function () {
+    // Fetch the JSON data from the file
+    fetch("table_recommendation.json")
+        .then((response) => response.json())
+        .then((data) => {
+            // Get the table element
+            const table = document.querySelector(".restock");
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     // Sample data
-//     const salesData = [50, 120, 80, 200, 100, 150];
-//     const categoryData = [30, 20, 25, 15, 10];
+            // Convert the JSON data to an array of objects for sorting
+            const dataArray = Object.entries(data).map(
+                ([id, recommendation]) => ({ id, recommendation })
+            );
 
-//     // Sales chart
-//     const salesCtx = document.getElementById("salesChart").getContext("2d");
-//     new Chart(salesCtx, {
-//         type: "bar",
-//         data: {
-//             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-//             datasets: [
-//                 {
-//                     label: "Sales",
-//                     data: salesData,
-//                     backgroundColor: "rgba(75, 192, 192, 0.2)",
-//                     borderColor: "rgba(75, 192, 192, 1)",
-//                     borderWidth: 1,
-//                 },
-//             ],
-//         },
-//     });
+            // Sort the array based on recommendation values in ascending order
+            dataArray.sort((a, b) => a.recommendation - b.recommendation);
 
-//     // Category chart
-//     const categoryCtx = document
-//         .getElementById("categoryChart")
-//         .getContext("2d");
-//     new Chart(categoryCtx, {
-//         type: "doughnut",
-//         data: {
-//             labels: ["Electronics", "Clothing", "Books", "Home", "Toys"],
-//             datasets: [
-//                 {
-//                     data: categoryData,
-//                     backgroundColor: [
-//                         "#FF6384",
-//                         "#36A2EB",
-//                         "#FFCE56",
-//                         "#4CAF50",
-//                         "#9966FF",
-//                     ],
-//                 },
-//             ],
-//         },
-//     });
-// });
+            // Loop through the sorted array and populate the table
+            for (const { id, recommendation } of dataArray) {
+                const row = table.insertRow();
+                const cell = row.insertCell(0);
+                cell.textContent = `${id}: ${recommendation}`;
+            }
+        })
+        .catch((error) => console.error("Error fetching JSON:", error));
+});

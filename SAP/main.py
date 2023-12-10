@@ -51,11 +51,11 @@ def main():
     fig = models.get(next(iter(min))).plot(forecasts.get(next(iter(min))), uncertainty=False, plot_cap=False,
                                            include_legend=True)
     fig.show()
-    fig.savefig("./frontend/src/prediction.svg", format="png")
+    fig.savefig("./frontend/src/prediction.png", format="png")
 
     fig = models.get(next(iter(min))).plot_components(forecasts.get(next(iter(min))))
     fig.show()
-    fig.savefig("./frontend/src/periodic_progress.svg", format="png")
+    fig.savefig("./frontend/src/periodic_progress.png", format="png")
 
 
 # Fisierul asta trebuie rulat din terminal pentru a rula programul
