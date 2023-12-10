@@ -1,11 +1,11 @@
 from sys import exit
 
-import prophet
 from prophet import Prophet
 import pandas as pd
 import numpy as np
 import matplotlib as mp
 import logging
+
 
 def main():
     # read the Excel file
@@ -46,6 +46,8 @@ def main():
 
                 models[id] = m
                 forecasts[id] = m.predict(future)
+
+            id = str(row["Product_ID"])
 
     fig = models.get('15036').plot(forecasts.get('15036'), uncertainty=False, plot_cap=False, include_legend=True)
     fig.show()
