@@ -18,16 +18,17 @@ def get_contacts(filename):
         names.append(a_contact.split()[0])
         emails.append(a_contact.split()[1])
         phones.append(a_contact.split()[2])
-    contacts_file.close
+    contacts_file.close()
     return names, emails, phones
 
 
 # Returns a Template object comprising the contents of the 
-def read_template(filename):    
+def read_template(filename):
     template_file = open(filename, mode='r', encoding='utf-8')
     template_file_content = template_file.read()
     template_file.close()
     return Template(template_file_content)
+
 
 # send email function
 def send_email(File_contacts, File_message):
@@ -60,6 +61,7 @@ def send_email(File_contacts, File_message):
             smtp.login(sender, app_psswd)
             smtp.sendmail(sender, receiver_email, em.as_string())
 
+
 # Do not touch anything when running
 def send_Wapp_Message(message, File_contacts):
     # Defining the Phone Number and Message
@@ -72,7 +74,8 @@ def send_Wapp_Message(message, File_contacts):
     # Displaying a Success Message
     print("WhatsApp message sent!")
 
-# Sender and Receiver should have phone numbers verified by Twilio 
+
+# Sender and Receiver should have phone numbers verified by Twilio
 def send_sms(message, File_contacts):
     # Defining the Phone Number and Message
     names, emails, phones = get_contacts(File_contacts)
@@ -84,11 +87,9 @@ def send_sms(message, File_contacts):
     client = Client(account_sid, auth_token)
     for p in phones:
         sms = client.messages.create(
-            body = message,
-            from_ = twilio_number,
-            to = p
+            body=message,
+            from_=twilio_number,
+            to=p
         )
 
         print(sms.body)
-
-
